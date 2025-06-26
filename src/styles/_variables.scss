@@ -1,0 +1,31 @@
+// Typography
+$font-body: 'Inter', sans-serif;
+
+// Colors
+$color-primary: #4b57c6;
+$color-accent: #F56565;
+$color-bg: #F7FAFC;
+$color-surface: #FFFFFF;
+$color-heading: #2D3748;
+$color-text: #4A5568;
+$color-text-muted: #A0AEC0;
+$color-border: #E2E8F0;
+$color-success: #38A169;
+$color-warning: #ED8936;
+
+// Spacing
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+
+// Border radius
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+
+// Shadows
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+$shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);

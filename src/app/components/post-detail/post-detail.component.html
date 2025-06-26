@@ -1,1 +1,20 @@
-<p>post-detail works!</p>
+<div class="container">
+  <h1>{{post?.title}}</h1>
+  <div class="post-body">{{post?.body}}</div>
+  
+  <section class="comments-section">
+    <h2>Comments ({{comments.length}})</h2>
+    
+    <ul class="comments-list">
+      <li *ngFor="let comment of comments" class="comment-card">
+        <div class="comment-header">
+          <span class="comment-author">{{comment.name}}</span>
+          <span class="comment-email">{{comment.email}}</span>
+        </div>
+        <p class="comment-body">{{comment.body}}</p>
+      </li>
+    </ul>
+  </section>
+  
+  <div *ngIf="errorMessage" class="error">{{errorMessage}}</div>
+</div>
