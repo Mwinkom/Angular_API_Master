@@ -1,1 +1,14 @@
-<p>post-list works!</p>
+<div class="container">
+  <h1>Posts</h1>
+
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+
+  <ul class="posts-grid">
+    <li *ngFor="let post of posts" class="post-card" [routerLink] = "['/post', post.id]">
+      <h2 class="post-title">{{ post.title }}</h2>
+      <p class="post-body">{{ post.body }}</p>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,92 @@
+@use 'sass:color';
+@use '../../../styles/variables' as v;
+@use '../../../styles/mixins' as *;
+
+.container {
+  @include container;
+  max-width: 800px;
+}
+
+h1 {
+  @include heading;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: v.$color-heading;
+  margin-bottom: v.$spacing-lg;
+  line-height: 1.2;
+  text-transform: capitalize;
+}
+
+.post-body {
+  @include body-text;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: v.$spacing-xl;
+  padding: v.$spacing-lg;
+  background: v.$color-surface;
+  border-radius: v.$radius-md;
+  border-left: 4px solid v.$color-primary;
+}
+
+.comments-section {
+  margin-top: v.$spacing-xl;
+  
+  h2 {
+    @include heading;
+    font-size: 1.5rem;
+    color: v.$color-heading;
+    margin-bottom: v.$spacing-lg;
+    padding-bottom: v.$spacing-sm;
+    border-bottom: 2px solid v.$color-border;
+  }
+}
+
+.comments-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: v.$spacing-md;
+}
+
+.comment-card {
+  @include card(v.$shadow-sm);
+  padding: v.$spacing-md;
+  border-radius: v.$radius-md;
+  
+  .comment-header {
+    display: flex;
+    align-items: center;
+    gap: v.$spacing-sm;
+    margin-bottom: v.$spacing-sm;
+    
+    .comment-author {
+      font-weight: 600;
+      color: v.$color-primary;
+      text-transform: capitalize;
+      font-size: 0.95rem;
+    }
+    
+    .comment-email {
+      color: v.$color-text-muted;
+      font-size: 0.85rem;
+    }
+  }
+  
+  .comment-body {
+    @include body-text;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+}
+
+.error {
+  background: color.adjust(v.$color-accent, $lightness: 45%);
+  color: v.$color-accent;
+  padding: v.$spacing-md;
+  border-radius: v.$radius-md;
+  margin-top: v.$spacing-lg;
+  border-left: 4px solid v.$color-accent;
+  font-weight: 500;
+}

@@ -1,0 +1,56 @@
+@use 'variables' as *;
+
+// Card mixin
+@mixin card($shadow: $shadow-sm) {
+  background: $color-surface;
+  border-radius: $radius-md;
+  box-shadow: $shadow;
+  border: 1px solid $color-border;
+}
+
+// Button mixin
+@mixin button($bg-color: $color-primary, $text-color: $color-surface) {
+  background: $bg-color;
+  color: $text-color;
+  border: none;
+  border-radius: $radius-sm;
+  padding: $spacing-xs $spacing-sm;
+  font-family: $font-body;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+}
+
+// Hover lift effect
+@mixin hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+}
+
+// Container mixin
+@mixin container($max-width: 800px) {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $spacing-lg;
+}
+
+// Text styles
+@mixin heading {
+  color: $color-heading;
+  font-family: $font-body;
+  font-weight: 600;
+}
+
+@mixin body-text {
+  color: $color-text;
+  font-family: $font-body;
+  line-height: 1.6;
+}

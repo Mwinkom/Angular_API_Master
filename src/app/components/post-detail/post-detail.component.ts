@@ -1,11 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-post-detail',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss'
 })
-export class PostDetailComponent {
 
+export class PostDetailComponent {
+  post: any;
+  comments: any[] = [];
+  errorMessage: string = "";
+
+  constructor(
+    private apiService: ApiService, 
+    private route: ActivatedRoute){}
+
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get("id"));
+
+    this.apiService.getPost(id).subscribe({
+      next: (data) => this.post = data,
+      error: (err) => this.errorMessage = err.message
+    });
+
+    this.apiService.getComments(id).subscribe({
+      next: (data) => this.comments = data,
+      error: (err) => this.errorMessage = err.message
+    });
+  }
 }
