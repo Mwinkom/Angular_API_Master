@@ -7,5 +7,6 @@ export const BANNED_WORDS: string[] = [
     'fool',
     'bullshit',
     'motherfucker',
-    'fuck'
+    'fuck',
+    'bitch'
 ]

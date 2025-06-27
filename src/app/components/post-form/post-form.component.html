@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>Create New Post</h1>
+    <h1>{{ isEditMode ? 'Edit Post' : 'Create New Post' }}</h1>
 
     <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
         <label for="title">Title</label>
@@ -14,7 +14,7 @@
         </div>
 
         <label for="body">Content</label>
-        <textarea id="body" rows="5" formControlName = "body"></textarea>
+        <textarea id="body" rows="8" formControlName = "body"></textarea>
 
         <div class="error" *ngIf="postForm.get('body')?.touched && postForm.get('body')?.invalid">
             Body is required (min 10 characters)

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, catchError } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { ErrorHandlerService } from './error-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,39 +10,35 @@ import { environment } from '../../environments/environment';
 export class ApiService {
   private baseUrl = `${environment.apiUrl}/posts`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) {}
 
   getPosts(): Observable<any> {
     return this.http.get(this.baseUrl).pipe(
-      catchError(this.handleError)
+      catchError(this.errorHandler.handleError)
     );
   }
 
   getPost(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`).pipe(
-      catchError(this.handleError)
+      catchError(this.errorHandler.handleError)
     );
   }
 
   getComments(postId: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${postId}/comments`).pipe(
-      catchError(this.handleError)
+      catchError(this.errorHandler.handleError)
     );
   }
 
   createPost(postData: {title: string, body: string}): Observable<any> {
     return this.http.post(this.baseUrl, postData).pipe(
-      catchError(this.handleError)
+      catchError(this.errorHandler.handleError)
     );
   }
 
-  private handleError(error: HttpErrorResponse) {
-    let errorMsg = 'An unknown error occurred';
-    if (error.error instanceof ErrorEvent) {
-      errorMsg = `Client-side error: ${error.error.message}`;
-    } else {
-      errorMsg = `Server returned code ${error.status}: ${error.message}`;
-    }
-    return throwError(() => new Error(errorMsg));
+  updatePost(id: number, postData: {title: string, body: string}): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${id}`, postData).pipe(
+      catchError(this.errorHandler.handleError)
+    );
   }
 }
