@@ -14,18 +14,21 @@ export class ApiService {
 
   getPosts(): Observable<any> {
     return this.http.get(this.baseUrl).pipe(
+      this.errorHandler.retryRequest(),
       catchError(this.errorHandler.handleError)
     );
   }
 
   getPost(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`).pipe(
+      this.errorHandler.retryRequest(),
       catchError(this.errorHandler.handleError)
     );
   }
 
   getComments(postId: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${postId}/comments`).pipe(
+      this.errorHandler.retryRequest(),
       catchError(this.errorHandler.handleError)
     );
   }
