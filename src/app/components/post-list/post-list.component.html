@@ -1,5 +1,12 @@
 <div class="container">
-  <h1>Posts</h1>
+  <div class="header">
+    <h1>Posts</h1>
+    <button class="create-btn" [routerLink]="['/create']">+ New Post</button>
+  </div>
+
+  <div *ngIf="successMessage" class="toast">
+    {{ successMessage }}
+  </div>
 
   <div *ngIf="errorMessage" class="error">
     {{ errorMessage }}

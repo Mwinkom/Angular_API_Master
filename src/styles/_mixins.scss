@@ -36,7 +36,7 @@
 }
 
 // Container mixin
-@mixin container($max-width: 800px) {
+@mixin container($max-width: 1000px) {
   max-width: $max-width;
   margin: 0 auto;
   padding: $spacing-lg;
