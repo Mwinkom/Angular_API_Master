@@ -1,0 +1,106 @@
+@use 'sass:color';
+@use '../../../styles/variables' as v;
+@use '../../../styles/mixins' as *;
+
+.container {
+  @include container;
+  max-width: 600px;
+}
+
+h1 {
+  @include heading;
+  font-size: 2rem;
+  font-weight: 700;
+  color: v.$color-heading;
+  margin-bottom: v.$spacing-xl;
+  text-align: center;
+}
+
+form {
+  @include card(v.$shadow-md);
+  padding: v.$spacing-xl;
+  border-radius: v.$radius-lg;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  color: v.$color-heading;
+  margin-bottom: v.$spacing-xs;
+  margin-top: v.$spacing-lg;
+  
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+input, textarea {
+  width: 100%;
+  padding: v.$spacing-sm;
+  border: 2px solid v.$color-border;
+  border-radius: v.$radius-sm;
+  font-family: v.$font-body;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: v.$color-primary;
+    box-shadow: 0 0 0 3px color.adjust(v.$color-primary, $alpha: -0.9);
+  }
+  
+  &.ng-invalid.ng-touched {
+    border-color: v.$color-accent;
+  }
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+button {
+  background: v.$color-primary;
+  color: white;
+  border: none;
+  padding: v.$spacing-sm v.$spacing-lg;
+  border-radius: v.$radius-md;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: v.$spacing-lg;
+  width: 100%;
+  
+  &:hover:not(:disabled) {
+    background: color.adjust(v.$color-primary, $lightness: -10%);
+    transform: translateY(-1px);
+    box-shadow: v.$shadow-md;
+  }
+  
+  &:disabled {
+    background: color.adjust(v.$color-primary, $lightness: 20%, $saturation: -10%);
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.error {
+  background: color.adjust(v.$color-accent, $lightness: 45%);
+  color: v.$color-accent;
+  padding: v.$spacing-xs v.$spacing-sm;
+  border-radius: v.$radius-sm;
+  margin-top: v.$spacing-xs;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.success {
+  background: color.adjust(v.$color-success, $lightness: 45%);
+  color: v.$color-success;
+  padding: v.$spacing-sm;
+  border-radius: v.$radius-sm;
+  margin-top: v.$spacing-md;
+  font-weight: 500;
+  text-align: center;
+}

@@ -29,6 +29,12 @@ export class ApiService {
     );
   }
 
+  createPost(postData: {title: string, body: string}): Observable<any> {
+    return this.http.post(this.baseUrl, postData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMsg = 'An unknown error occurred';
     if (error.error instanceof ErrorEvent) {

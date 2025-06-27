@@ -1,1 +1,33 @@
-<p>post-form works!</p>
+<div class="container">
+    <h1>Create New Post</h1>
+
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+        <label for="title">Title</label>
+        <input id="title" formControlName="title" type="text" />
+
+        <div class="error" *ngIf="postForm.get('title')?.touched && postForm.get('title')?.invalid">
+            Title is required (min 5 characters)
+        </div>
+
+        <div class="error" *ngIf="postForm.get('title')?.hasError('profanity')">
+            Title contains inappropriate language
+        </div>
+
+        <label for="body">Content</label>
+        <textarea id="body" rows="5" formControlName = "body"></textarea>
+
+        <div class="error" *ngIf="postForm.get('body')?.touched && postForm.get('body')?.invalid">
+            Body is required (min 10 characters)
+        </div>
+
+        <div class="error" *ngIf="postForm.get('body')?.hasError('profanity')">
+            Content contains inappropriate language
+        </div>
+
+        <button type="submit" [disabled]="isSubmitting || postForm.invalid">Submit</button>
+
+        <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+        <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    </form>
+</div>
