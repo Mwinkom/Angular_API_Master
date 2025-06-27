@@ -6,14 +6,45 @@
   @include container;
 }
 
-h1 {
-  @include heading;
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: v.$color-heading;
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: v.$spacing-lg;
-  line-height: 1.2;
-  text-transform: capitalize;
+  gap: v.$spacing-md;
+  
+  h1 {
+    @include heading;
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: v.$color-heading;
+    margin: 0;
+    line-height: 1.2;
+    text-transform: capitalize;
+    flex: 1;
+  }
+}
+
+.edit-btn {
+  background: v.$color-primary;
+  color: white;
+  border: none;
+  padding: v.$spacing-xs v.$spacing-sm;
+  border-radius: v.$radius-sm;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  
+  &:hover {
+    background: color.adjust(v.$color-primary, $lightness: -10%);
+    transform: translateY(-1px);
+    box-shadow: v.$shadow-sm;
+  }
 }
 
 .post-body {
