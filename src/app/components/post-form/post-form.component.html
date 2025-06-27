@@ -9,11 +9,19 @@
             Title is required (min 5 characters)
         </div>
 
+        <div class="error" *ngIf="postForm.get('title')?.hasError('profanity')">
+            Title contains inappropriate language
+        </div>
+
         <label for="body">Content</label>
         <textarea id="body" rows="5" formControlName = "body"></textarea>
 
         <div class="error" *ngIf="postForm.get('body')?.touched && postForm.get('body')?.invalid">
             Body is required (min 10 characters)
+        </div>
+
+        <div class="error" *ngIf="postForm.get('body')?.hasError('profanity')">
+            Content contains inappropriate language
         </div>
 
         <button type="submit" [disabled]="isSubmitting || postForm.invalid">Submit</button>
