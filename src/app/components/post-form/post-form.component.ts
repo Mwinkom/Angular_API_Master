@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { noProfanityValidator } from '../../validators/no-profanity.validator';
 import { BANNED_WORDS } from '../../constants/banned_words';
 import { ActivatedRoute } from '@angular/router';
+import { CacheService } from '../../services/cache.service';
 
 @Component({
   selector: 'app-post-form',
@@ -22,7 +23,7 @@ export class PostFormComponent implements OnInit {
   isEditMode = false;
   postId: number | null = null;
 
-  constructor(private router: Router, private fb: FormBuilder, private apiService: ApiService, private route: ActivatedRoute){}
+  constructor(private router: Router, private fb: FormBuilder, private apiService: ApiService, private route: ActivatedRoute, private cache: CacheService){}
 
   ngOnInit(): void {
     this.postId = Number(this.route.snapshot.paramMap.get('id'));
@@ -53,6 +54,8 @@ export class PostFormComponent implements OnInit {
 
     request$.subscribe({
       next: () => {
+        // Clear cache to ensure fresh data is loaded
+        this.cache.clear();
         this.successMessage = this.isEditMode
         ? 'Post updated successfully!'
         : 'Post created successfully!';

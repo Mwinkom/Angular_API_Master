@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute ,RouterLink, Router } from '@angular/router';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { CacheService } from '../../services/cache.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-post-list',
@@ -24,7 +25,9 @@ export class PostListComponent implements OnInit {
   constructor(private apiService: ApiService, 
               private router: Router, 
               private route: ActivatedRoute,
-              private cache: CacheService){}
+              private cache: CacheService,
+              private auth: AuthService){}
+              
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(params => {
@@ -61,5 +64,15 @@ export class PostListComponent implements OnInit {
   clearCache(): void {
     this.cache.clear();
     this.fetchPosts(this.currentPage); // Refresh current page
+  }
+
+  login() {
+    this.auth.login();
+    alert('Logged in!');
+  }
+
+  logout() {
+    this.auth.logout();
+    alert('Logged out!');
   }
 }
