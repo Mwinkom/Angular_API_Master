@@ -19,3 +19,13 @@
     </li>
   </ul>
 </div>
+
+<app-pagination
+  [totalItems]="totalPosts"
+  [itemsPerPage]="postsPerPage"
+  [currentPage]="currentPage"
+  (pageChange)="goToPage($event)"
+>
+</app-pagination>
+
+

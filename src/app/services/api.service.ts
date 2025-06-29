@@ -12,8 +12,9 @@ export class ApiService {
 
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) {}
 
-  getPosts(): Observable<any> {
-    return this.http.get(this.baseUrl).pipe(
+  getPosts(page: number = 1, limit: number = 10): Observable<any> {
+    const url = `${this.baseUrl}?_page=${page}&_limit=${limit}`
+    return this.http.get(url, {observe: 'response'}).pipe(
       this.errorHandler.retryRequest(),
       catchError(this.errorHandler.handleError)
     );

@@ -1,1 +1,8 @@
-<p>pagination works!</p>
+<div class="pagination" *ngIf="totalPages.length > 1">
+    <button *ngFor="let page of totalPages" 
+            (click) = "changePage(page)"    
+            [class.active]="page === currentPage"
+    >
+        {{page}}
+    </button>
+</div>
