@@ -60,4 +60,10 @@ export class ApiService {
       catchError(this.errorHandler.handleError)
     );
   }
+
+  deletePost(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`).pipe(
+      catchError(this.errorHandler.handleError)
+    );
+  }
 }

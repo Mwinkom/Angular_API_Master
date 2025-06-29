@@ -1,17 +1,66 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpInterceptorFn } from '@angular/common/http';
+import { HttpRequest, HttpHandlerFn } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
+import { AuthService } from '../services/auth.service';
+import { of } from 'rxjs';
 
-import { authInterceptor } from './auth.interceptor';
-
-describe('authInterceptor', () => {
-  const interceptor: HttpInterceptorFn = (req, next) => 
-    TestBed.runInInjectionContext(() => authInterceptor(req, next));
+describe('AuthInterceptor', () => {
+  let authService: jasmine.SpyObj<AuthService>;
+  let mockNext: jasmine.Spy<HttpHandlerFn>;
+  let mockRequest: HttpRequest<any>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    const authSpy = jasmine.createSpyObj('AuthService', ['getToken']);
+    
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: AuthService, useValue: authSpy }
+      ]
+    });
+
+    authService = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
+    mockNext = jasmine.createSpy('HttpHandlerFn').and.returnValue(of({}));
+    mockRequest = new HttpRequest('GET', '/test');
   });
 
-  it('should be created', () => {
-    expect(interceptor).toBeTruthy();
+  it('should add Authorization header when token exists', () => {
+    authService.getToken.and.returnValue('test-token');
+
+    TestBed.runInInjectionContext(() => {
+      AuthInterceptor(mockRequest, mockNext);
+    });
+
+    expect(mockNext).toHaveBeenCalledWith(
+      jasmine.objectContaining({
+        headers: jasmine.objectContaining({
+          lazyUpdate: jasmine.arrayContaining([
+            jasmine.objectContaining({
+              name: 'Authorization',
+              value: 'Bearer test-token'
+            })
+          ])
+        })
+      })
+    );
+  });
+
+  it('should not add Authorization header when no token', () => {
+    authService.getToken.and.returnValue(null);
+
+    TestBed.runInInjectionContext(() => {
+      AuthInterceptor(mockRequest, mockNext);
+    });
+
+    expect(mockNext).toHaveBeenCalledWith(mockRequest);
+  });
+
+  it('should call next handler', () => {
+    authService.getToken.and.returnValue('test-token');
+
+    TestBed.runInInjectionContext(() => {
+      AuthInterceptor(mockRequest, mockNext);
+    });
+
+    expect(mockNext).toHaveBeenCalled();
   });
 });

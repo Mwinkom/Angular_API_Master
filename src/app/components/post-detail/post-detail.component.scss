@@ -23,6 +23,11 @@
     text-transform: capitalize;
     flex: 1;
   }
+  
+  .post-actions {
+    display: flex;
+    gap: v.$spacing-xs;
+  }
 }
 
 .edit-btn {
@@ -42,6 +47,25 @@
   
   &:hover {
     background: color.adjust(v.$color-primary, $lightness: -10%);
+    transform: translateY(-1px);
+    box-shadow: v.$shadow-sm;
+  }
+}
+
+.delete-btn {
+  background: v.$color-accent;
+  color: white;
+  border: none;
+  padding: v.$spacing-xs v.$spacing-sm;
+  border-radius: v.$radius-sm;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  
+  &:hover {
+    background: color.adjust(v.$color-accent, $lightness: -10%);
     transform: translateY(-1px);
     box-shadow: v.$shadow-sm;
   }

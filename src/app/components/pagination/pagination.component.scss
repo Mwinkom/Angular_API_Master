@@ -8,6 +8,8 @@
   align-items: center;
   gap: v.$spacing-xs;
   margin: v.$spacing-xl 0;
+  flex-wrap: wrap;
+  padding: 0 v.$spacing-sm;
   
   button {
     background: v.$color-surface;
@@ -16,11 +18,11 @@
     padding: v.$spacing-xs v.$spacing-sm;
     border-radius: v.$radius-sm;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    min-width: 40px;
-    height: 40px;
+    min-width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,6 +49,31 @@
       cursor: not-allowed;
       transform: none;
       box-shadow: none;
+    }
+  }
+  
+  // Desktop styles
+  @media (min-width: 768px) {
+    gap: v.$spacing-sm;
+    padding: 0;
+    
+    button {
+      font-size: 0.9rem;
+      min-width: 40px;
+      height: 40px;
+      padding: v.$spacing-xs v.$spacing-sm;
+    }
+  }
+  
+  // Very small screens
+  @media (max-width: 480px) {
+    gap: 2px;
+    
+    button {
+      font-size: 0.8rem;
+      min-width: 32px;
+      height: 32px;
+      padding: 2px 6px;
     }
   }
 }
