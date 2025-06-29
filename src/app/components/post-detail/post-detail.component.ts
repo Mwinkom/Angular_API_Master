@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { RouterLink } from '@angular/router';
+import { CacheService } from '../../services/cache.service';
 
 @Component({
   selector: 'app-post-detail',
@@ -19,7 +20,9 @@ export class PostDetailComponent implements OnInit {
 
   constructor(
     private apiService: ApiService, 
-    private route: ActivatedRoute){}
+    private route: ActivatedRoute,
+    private router: Router,
+    private cache: CacheService){}
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get("id"));
@@ -39,5 +42,19 @@ export class PostDetailComponent implements OnInit {
       next: (data) => this.comments = data,
       error: (err) => this.errorMessage = err.message
     });
+  }
+
+  deletePost(): void {
+    if (!this.post?.id) return;
+    
+    if (confirm('Are you sure you want to delete this post?')) {
+      this.apiService.deletePost(this.post.id).subscribe({
+        next: () => {
+          this.cache.clear();
+          this.router.navigate(['/'], { state: { successMessage: 'Post deleted successfully!' } });
+        },
+        error: (err) => this.errorMessage = err.message
+      });
+    }
   }
 }

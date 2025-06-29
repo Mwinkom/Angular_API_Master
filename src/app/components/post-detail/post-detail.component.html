@@ -4,7 +4,10 @@
   <div *ngIf="!isLoading">
     <div class="post-header">
       <h1>{{post?.title || 'Post Not Found'}}</h1>
-      <button class="edit-btn" [routerLink]="['/edit', post.id]" *ngIf="post">Edit Post</button>
+      <div class="post-actions" *ngIf="post">
+        <button class="edit-btn" [routerLink]="['/edit', post.id]">Edit Post</button>
+        <button class="delete-btn" (click)="deletePost()">Delete Post</button>
+      </div>
     </div>
     
     <div *ngIf="errorMessage" class="error">{{errorMessage}}</div>
