@@ -1,0 +1,52 @@
+@use 'sass:color';
+@use '../../../styles/variables' as v;
+@use '../../../styles/mixins' as *;
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: v.$spacing-xs;
+  margin: v.$spacing-xl 0;
+  
+  button {
+    background: v.$color-surface;
+    color: v.$color-text;
+    border: 2px solid v.$color-border;
+    padding: v.$spacing-xs v.$spacing-sm;
+    border-radius: v.$radius-sm;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+      background: v.$color-primary;
+      color: white;
+      border-color: v.$color-primary;
+      transform: translateY(-1px);
+      box-shadow: v.$shadow-sm;
+    }
+    
+    &.active {
+      background: v.$color-primary;
+      color: white;
+      border-color: v.$color-primary;
+      box-shadow: v.$shadow-sm;
+    }
+    
+    &:disabled {
+      background: v.$color-bg;
+      color: v.$color-text-muted;
+      border-color: v.$color-border;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}

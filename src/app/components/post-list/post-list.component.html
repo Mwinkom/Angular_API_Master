@@ -1,7 +1,10 @@
 <div class="container">
   <div class="header">
     <h1>Posts</h1>
-    <button class="create-btn" [routerLink]="['/create']">+ New Post</button>
+    <div class="header-actions">
+      <button class="clear-cache-btn" (click)="clearCache()">Clear Cache</button>
+      <button class="create-btn" [routerLink]="['/create']">+ New Post</button>
+    </div>
   </div>
 
   <div *ngIf="successMessage" class="toast">
@@ -19,3 +22,13 @@
     </li>
   </ul>
 </div>
+
+<app-pagination
+  [totalItems]="totalPosts"
+  [itemsPerPage]="postsPerPage"
+  [currentPage]="currentPage"
+  (pageChange)="goToPage($event)"
+>
+</app-pagination>
+
+
