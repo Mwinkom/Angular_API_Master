@@ -19,16 +19,22 @@
     font-size: 2.5rem;
     color: v.$color-heading;
   }
+  
+  .header-actions {
+    display: flex;
+    gap: v.$spacing-sm;
+    align-items: center;
+  }
 }
 
 .create-btn {
   background: v.$color-primary;
   color: white;
   border: none;
-  padding: v.$spacing-sm v.$spacing-md;
-  border-radius: v.$radius-md;
-  font-weight: 550;
-  font-size: 1rem;
+  padding: v.$spacing-xs v.$spacing-sm;
+  border-radius: v.$radius-sm;
+  font-weight: 600;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
@@ -40,6 +46,24 @@
     background: color.adjust(v.$color-primary, $lightness: -10%);
     transform: translateY(-1px);
     box-shadow: v.$shadow-md;
+  }
+}
+
+.clear-cache-btn {
+  background: v.$color-border;
+  color: v.$color-text;
+  border: none;
+  padding: v.$spacing-xs v.$spacing-sm;
+  border-radius: v.$radius-sm;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: v.$color-text-muted;
+    color: white;
+    transform: translateY(-1px);
   }
 }
 

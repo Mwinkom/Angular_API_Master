@@ -111,6 +111,13 @@
   }
 }
 
+.loading {
+  text-align: center;
+  padding: v.$spacing-xl;
+  color: v.$color-text-muted;
+  font-size: 1.1rem;
+}
+
 .error {
   background: color.adjust(v.$color-accent, $lightness: 45%);
   color: v.$color-accent;

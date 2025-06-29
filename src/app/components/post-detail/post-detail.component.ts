@@ -15,6 +15,7 @@ export class PostDetailComponent implements OnInit {
   post: any;
   comments: any[] = [];
   errorMessage: string = "";
+  isLoading: boolean = true;
 
   constructor(
     private apiService: ApiService, 
@@ -24,8 +25,14 @@ export class PostDetailComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get("id"));
 
     this.apiService.getPost(id).subscribe({
-      next: (data) => this.post = data,
-      error: (err) => this.errorMessage = err.message
+      next: (data) => {
+        this.post = data;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.errorMessage = err.message;
+        this.isLoading = false;
+      }
     });
 
     this.apiService.getComments(id).subscribe({
