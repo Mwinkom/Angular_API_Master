@@ -8,8 +8,7 @@
 
 .post-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
   margin-bottom: v.$spacing-lg;
   gap: v.$spacing-md;
   
