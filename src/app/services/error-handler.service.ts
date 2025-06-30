@@ -22,11 +22,22 @@ export class ErrorHandlerService {
 
   handleError(error: HttpErrorResponse) {
     let errorMsg = 'An unknown error occurred';
+    
     if (error.error instanceof ErrorEvent) {
-      errorMsg = `Client-side error: ${error.error.message}`;
+      // Client-side or network error
+      errorMsg = `Network error: ${error.error.message}`;
+    } else if (error.status === 0) {
+      // Network error or CORS issue
+      errorMsg = 'Unable to connect to server. Please check your connection.';
+    } else if (error.status === 404) {
+      errorMsg = 'The requested resource was not found.';
+    } else if (error.status >= 500) {
+      errorMsg = 'Server error occurred. Please try again later.';
     } else {
-      errorMsg = `Server returned code ${error.status}: ${error.message}`;
+      errorMsg = `Error ${error.status}: ${error.message || 'Something went wrong'}`;
     }
+    
+    console.error('HTTP Error:', error);
     return throwError(() => new Error(errorMsg));
   }
 }

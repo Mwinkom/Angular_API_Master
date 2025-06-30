@@ -64,6 +64,7 @@ export class PostListComponent implements OnInit {
   clearCache(): void {
     this.cache.clear();
     this.fetchPosts(this.currentPage); // Refresh current page
+    alert('Cache cleared successfully');
   }
 
   login() {
