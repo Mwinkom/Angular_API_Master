@@ -26,7 +26,6 @@ export class CacheService {
 
   clear(): void {
     this.cache.clear();
-    alert('Cache cleared successfully');
   }
 
   delete(key: string): void {
